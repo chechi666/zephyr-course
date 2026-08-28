@@ -4,7 +4,7 @@
 
 
 /* The devicetree node identifier for the "led0" alias. */
-/* now we use a app_led alias for led0*/
+/* now use a app_led alias for led0*/
 #define LED_NODE DT_ALIAS(app_led)
 
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
