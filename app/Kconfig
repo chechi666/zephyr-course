@@ -1,3 +1,8 @@
+config APP_HEARTBEAT_PERIOD_MS
+	int "app heartbeat (ms)"
+	default 500
+	range 100 2000
+
 menuconfig LED_SUBSYSTEM
 	bool "LED Subsystem"
 	default y
@@ -50,5 +55,7 @@ config LED_CUSTOM_BLINK_PATTERN
 endmenu
 endif #LED_ADVANCED
 endif #LED_SUBSYSTEM
+
+
 
 source "Kconfig.zephyr"
