@@ -1,0 +1,6 @@
+board:
+  name: esp32_from_scratch
+  full_name: ESP32 Copia Mia
+  vendor: Diego
+  socs:
+    - name: esp32
