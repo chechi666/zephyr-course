@@ -1,0 +1,3 @@
+description: driver for led on/off
+compatible: "diego,led"
+include: base.yalm

@@ -2,4 +2,18 @@
 	aliases {
 		app-led = &blue_led;
 	};
+
+	leds {
+		compatible = "gpio-leds"; 
+		
+		red_led: red_led {
+			gpios = < &gpio0 0x4 0x0 >;
+			label = "External LED";
+		};
+	};
+
+	diego_led0: diego_led{
+		compatible = "diego,led";
+		status = "okay";
+	};
 };
