@@ -2,11 +2,13 @@
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 #include <zephyr/drivers/sensor.h>
+#include "../includes/diego_led.h"
 
 /* The devicetree node identifier for the "led0" alias. */
 /* now use a app_led alias for led0*/
 #define LED_NODE DT_ALIAS(app_led)
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
+const struct device *dev = DEVICE_DT_GET(DT_NODELABEL(diego_led0));
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
@@ -20,12 +22,13 @@ namespace {
 		ret = sensor_sample_fetch(driver);
 		k_msleep(CONFIG_APP_HEARTBEAT_PERIOD_MS);
 		ret = sensor_channel_get(driver, SENSOR_CHAN_AMBIENT_TEMP, &val);
+		diego_led_set_valor(dev, 100);
 	}
 }
 
 int main(void)
 {
-    
+      
     bool led_state = true;
 
     if (!gpio_is_ready_dt(&led)) return 0;
