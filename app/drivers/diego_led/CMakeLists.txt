@@ -1,3 +1,6 @@
 if (CONFIG_DIEGO_LED)
 	target_sources(app PRIVATE diego_led.c)
+	if (CONFIG_SHELL)
+		target_sources(app PRIVATE diego_led_shell.c)
+	endif()
 endif()

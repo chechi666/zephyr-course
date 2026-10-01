@@ -9,19 +9,18 @@
 #define LED_NODE DT_ALIAS(app_led)
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
 const struct device *dev = DEVICE_DT_GET(DT_NODELABEL(diego_led0));
+struct sensor_value val;
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
 namespace {
 	void test() {
-		const struct device* driver = DEVICE_DT_GET(DT_NODELABEL(diego_led0));
-		struct sensor_value val;
-		int ret = sensor_channel_get(driver, SENSOR_CHAN_AMBIENT_TEMP, &val);
+		int ret = sensor_channel_get(dev, SENSOR_CHAN_AMBIENT_TEMP, &val);
 		LOG_INF("Channel ret %d", ret);
 		k_msleep(CONFIG_APP_HEARTBEAT_PERIOD_MS);
-		ret = sensor_sample_fetch(driver);
+		ret = sensor_sample_fetch(dev);
 		k_msleep(CONFIG_APP_HEARTBEAT_PERIOD_MS);
-		ret = sensor_channel_get(driver, SENSOR_CHAN_AMBIENT_TEMP, &val);
+		ret = sensor_channel_get(dev, SENSOR_CHAN_AMBIENT_TEMP, &val);
 		diego_led_set_valor(dev, 100);
 	}
 }
