@@ -49,7 +49,11 @@ static int sensor_set_cmd(const struct shell *sh, size_t argc,
         if (errno != 0 || *endptr != '\0') {
           shell_error(sh,"<arg> mut be an integer");
           return -EINVAL;
-          }
+        }
+        if (val < 0 || val > 100) {
+        shell_error(sh, "Value must be between 0 and 100");
+        return -EINVAL;
+        }
         diego_led_set_valor(driver, val);
         return 0;
 }
